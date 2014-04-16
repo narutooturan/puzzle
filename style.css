@@ -1,0 +1,53 @@
+body {
+	margin: auto;
+}
+
+/* puzzle */
+.content {
+	width: 900px;
+	margin: 50px auto;
+}
+
+.puzzle {
+	height: 400px;
+	width: 350px;
+	margin: 50px;
+	/* puzzle position */
+	float: left;
+}
+
+.tile {
+	/* 3*3: 100px; */
+	/* 4*4: 80px; */
+	height: 100px;
+	width: 100px;
+	/* center text */
+	line-height: 100px;
+	text-align: center;
+	/* tile position */
+	float: left;
+	/* tile style */
+	border: 1px solid black;
+}
+
+/* puzzle control */
+.control {
+	width: 400px;
+	height: 200px;
+	margin: 20px auto;
+}
+
+.button {
+	border:1px solid #333;
+	border-radius:25px;
+	padding: 5px 10px;
+	margin: 5px;
+
+	background-color: #fff;
+	color: #333;
+}
+
+.button:hover {
+	background-color: #333;
+	color: #fff;
+}
