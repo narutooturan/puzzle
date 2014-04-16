@@ -2,32 +2,37 @@ body {
 	margin: auto;
 }
 
+h2 {
+	text-align: center;
+
+}
+
 /* puzzle */
 .content {
-	width: 900px;
+	width: 800px;
 	margin: 50px auto;
 }
 
 .puzzle {
-	height: 400px;
-	width: 350px;
-	margin: 50px;
+	height: 320px;
+	width: 260px;
+	margin: 30px 50px;
 	/* puzzle position */
 	float: left;
 }
 
 .tile {
-	/* 3*3: 100px; */
-	/* 4*4: 80px; */
-	height: 100px;
-	width: 100px;
+	height: 80px;
+	width: 80px;
 	/* center text */
-	line-height: 100px;
+	line-height: 80px;
 	text-align: center;
 	/* tile position */
 	float: left;
 	/* tile style */
 	border: 1px solid black;
+	border-radius: 5px;
+	margin: 2px;
 }
 
 /* puzzle control */
@@ -38,16 +43,16 @@ body {
 }
 
 .button {
-	border:1px solid #333;
+	border:1px solid #000;
 	border-radius:25px;
 	padding: 5px 10px;
 	margin: 5px;
 
 	background-color: #fff;
-	color: #333;
+	color: #000;
 }
 
 .button:hover {
-	background-color: #333;
+	background-color: #000;
 	color: #fff;
 }
