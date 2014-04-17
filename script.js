@@ -33,12 +33,18 @@ end
 
 */
 
+// last move's direction
+var  lastMoveDir = "";
+// last move
+var lastMove = [];
+
+var iteration = 0;
 function iterativeDeepening ( state ) {
 /*
 iterative deepening: run search function with specific depth(threshold) iteratively.
 state: puzzle's state, [0,1,2,3,4,5,6,7,8]
 */
-
+	
 	var threshold = manhattan( state );
 　　var solution = false;
 　　while ( !solution ) {
@@ -50,13 +56,13 @@ state: puzzle's state, [0,1,2,3,4,5,6,7,8]
         threshold = incrementThreshold( threshold );
 	}
 	// show find solution
-　　console.log("Solution found at depth: " + threshold);
 	return true;
 }
 
 function search ( state, g, threshold ) {
-	h = manhattan( state );
-　　if ( h == 0 ) {
+	iteration++;
+	var h = manhattan( state );
+	if ( h == 0 ) {
 		return true;
 	}
 　　　    
@@ -64,16 +70,81 @@ function search ( state, g, threshold ) {
 		return false;
 	}
 
-　　movelist = generateMoves( state );
-　　/*
-	Foreach move on movelist do
-　　　   MakeMove( state, move )
-　　　   If Search( state, g+1, threshold ) == TRUE then
-　　　       Return TRUE
-　　　   undoMove( state, move )
-　　Endfor
-	*/
+　　var movelist = generateMoves( state );
+
+	for( move in movelist ) {
+		move = movelist[move];
+		state = makeMove( state, move );
+		lastMove.push(move);
+		lastMoveDir = move[1];
+		if ( search( state, g + 1, threshold ) == true){
+			return true;
+		}
+		iteration--;
+		state = undoMove( state, lastMove[lastMove.length-1] );
+		lastMove.pop();
+	}
+
 	return false;
+}
+
+function makeMove ( state, move ) {
+	// moving node's direction and array index
+	var moveDir = move[1];
+	var moveNode = move[0];
+	// node's array index after move
+	var node = [];
+	switch ( moveDir ) {
+		case "up":
+			node[0] = moveNode[0] - 1;
+			node[1] = moveNode[1];
+		break;
+		case "left":
+			node[1] = moveNode[1] - 1;
+			node[0] = moveNode[0];
+		break;
+		case "down":
+			node[0] = moveNode[0] + 1;
+			node[1] = moveNode[1];
+		break;
+		case "right":
+			node[1] = moveNode[1] + 1;
+			node[0] = moveNode[0];
+		break;
+	}
+	// change state
+	state[ node[0]*3 + node[1] ] = state[ moveNode[0]*3 + moveNode[1] ];
+	state[ moveNode[0]*3 + moveNode[1] ] = 0;
+	return state;
+}
+
+function undoMove ( state, move ) {
+	// moving node's direction and array index
+	var moveDir = move[1];
+	var moveNode = move[0];
+	// node's array index after move
+	var node = [];
+	switch ( moveDir ) {
+		case "up":
+			node[0] = moveNode[0] - 1;
+			node[1] = moveNode[1];
+		break;
+		case "left":
+			node[1] = moveNode[1] - 1;
+			node[0] = moveNode[0];
+		break;
+		case "down":
+			node[0] = moveNode[0] + 1;
+			node[1] = moveNode[1];
+		break;
+		case "right":
+			node[1] = moveNode[1] + 1;
+			node[0] = moveNode[0];
+		break;
+	}
+	state[ moveNode[0]*3 + moveNode[1] ] = state[ node[0]*3 + node[1] ];
+	state[ node[0]*3 + node[1] ] = 0;
+	return state;
 }
 
 function generateMoves ( state ) {
@@ -108,20 +179,28 @@ function generateMoves ( state ) {
 	// check if neighbour is available ==> if array's index is not out of bound
 	for(n in neighbours){
 		n = parseInt(n);
-		if( ( neighbours[n][0] >= 0 ) && ( neighbours[n][0] <= 3 ) && ( neighbours[n][1] >= 0 ) && ( neighbours[n][1] <= 3 ) ){
+		if( ( neighbours[n][0] >= 0 ) && ( neighbours[n][0] < 3 ) && ( neighbours[n][1] >= 0 ) && ( neighbours[n][1] < 3 ) ){
 			// add neighbour's index and direction to movelist
 			switch(n){
 				case 0:
-					movelist.push([neighbours[n], "down"]);
+					if ( lastMoveDir != "up" ){
+						movelist.push([neighbours[n], "down"]);
+					}
 				break;
 				case 1:
+					if ( lastMoveDir != "right" ){
 					movelist.push([neighbours[n], "left"]);
+					}
 				break;
 				case 2:
+					if ( lastMoveDir != "down" ){
 					movelist.push([neighbours[n], "up"]);
+					}
 				break;
 				case 3:
+					if ( lastMoveDir != "left" ){
 					movelist.push([neighbours[n], "right"]);
+					}
 				break;
 			}
 		}
