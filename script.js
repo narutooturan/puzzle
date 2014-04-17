@@ -31,19 +31,34 @@ Boolean <- Search( state, g, threshold )
 　　　Return FALSE
 end
 
+
+
+test state:
+[1,2,0,3,6,8,7,5,4]
+[1,8,4,5,0,7,3,2,6]
+
 */
 
+
+// current puzzle, default puzzle
+var curPuzzle = [1,2,0,3,6,8,7,5,4];
+
+// clear after solve!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // last move's direction
-var  lastMoveDir = "";
+var lastMoveDir = "";
 // last move
 var lastMove = [];
 
-var iteration = 0;
-function iterativeDeepening ( state ) {
+function iterativeDeepening () {
 /*
 iterative deepening: run search function with specific depth(threshold) iteratively.
 state: puzzle's state, [0,1,2,3,4,5,6,7,8]
 */
+	var state = [];
+	state = curPuzzle.concat();
+	lastMoveDir = "";
+	lastMove = [];
+	console.log("state: " + curPuzzle);
 	
 	var threshold = manhattan( state );
 　　var solution = false;
@@ -55,12 +70,15 @@ state: puzzle's state, [0,1,2,3,4,5,6,7,8]
 		// deepen search depth
         threshold = incrementThreshold( threshold );
 	}
+	
+	console.log("solution: " + lastMove);
+	showSolution();
 	// show find solution
 	return true;
+
 }
 
 function search ( state, g, threshold ) {
-	iteration++;
 	var h = manhattan( state );
 	if ( h == 0 ) {
 		return true;
@@ -80,7 +98,6 @@ function search ( state, g, threshold ) {
 		if ( search( state, g + 1, threshold ) == true){
 			return true;
 		}
-		iteration--;
 		state = undoMove( state, lastMove[lastMove.length-1] );
 		lastMove.pop();
 	}
@@ -255,4 +272,20 @@ function manhattan ( state ){
 
 	return manhattanCost;
 	
+}
+
+function newPuzzle() {
+	var puzzles = [
+		[1,2,0,3,6,8,7,5,4],
+		[1,8,4,5,0,7,3,2,6]
+	];
+	
+	var puzzle = [];
+
+	puzzle = puzzles[ Math.floor( Math.random() * puzzles.length ) ];
+	
+	console.log("current puzzle: " + puzzle);
+	curPuzzle = puzzle;
+
+	showPuzzle();
 }

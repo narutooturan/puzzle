@@ -4,7 +4,6 @@ body {
 
 h2 {
 	text-align: center;
-
 }
 
 /* puzzle */
@@ -13,10 +12,15 @@ h2 {
 	margin: 50px auto;
 }
 
+.puzzles {
+	width: 720px;
+	margin: auto;
+}
+
 .puzzle {
-	height: 320px;
+	
 	width: 260px;
-	margin: 30px 50px;
+	margin: 0px 50px 10px 50px;
 	/* puzzle position */
 	float: left;
 }
@@ -37,17 +41,21 @@ h2 {
 
 /* puzzle control */
 .control {
-	width: 400px;
-	height: 200px;
+	width: 800px;
 	margin: 20px auto;
+	float: left;
+}
+
+.btnGrp {
+	width: 360px;
+	margin: auto;
 }
 
 .button {
 	border:1px solid #000;
 	border-radius:25px;
 	padding: 5px 10px;
-	margin: 5px;
-
+	margin: auto 5px;
 	background-color: #fff;
 	color: #000;
 }
@@ -55,4 +63,10 @@ h2 {
 .button:hover {
 	background-color: #000;
 	color: #fff;
+}
+
+.info {
+	width: 800px;
+	float: left;
+
 }
