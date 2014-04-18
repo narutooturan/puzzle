@@ -79,6 +79,9 @@
 		function showState(){
 			for ( t in curPuzzle){
 				$(".tile")[t].innerHTML = curPuzzle[t];
+				if (curPuzzle[t]=="0"){
+					$(".tile")[t].innerHTML= "<p></p>";
+				}
 			}
 		}
 
