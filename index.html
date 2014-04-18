@@ -13,10 +13,10 @@
 	<div class="content">
 		<div>
 			<h2> — 8 puzzle — </h2>
+			<p style="text-align: center;" >W: ↑; D: →;S: ↓;A: ←;</p>
 		</div>
 		<div class="puzzles">
 			<div class="puzzle">
-				<p>目前状态</p>
 				<div class="tile"></div>
 				<div class="tile"></div>
 				<div class="tile"></div>
@@ -26,31 +26,20 @@
 				<div class="tile"></div>
 				<div class="tile"></div>
 				<div class="tile"></div>
-			</div>
-
-			<div class="puzzle">
-				<p>目标状态</p>
-				<div class="tile">0</div>
-				<div class="tile">1</div>
-				<div class="tile">2</div>
-				<div class="tile">3</div>
-				<div class="tile">4</div>
-				<div class="tile">5</div>
-				<div class="tile">6</div>
-				<div class="tile">7</div>
-				<div class="tile">8</div>
 			</div>
 		</div>
 		<div class="control">
 			<div class="btnGrp">
 			<button id="new" class="button" onclick="newPuzzle()" >New Puzzle!</button>
 			<button id="solve" class="button" onclick="iterativeDeepening()" >Solve!</button>
-			<button id="play" class="button" onclick="newPuzzle()" >Play the result!</button>
+			<button id="play" class="button" onclick="reset()" >Reset!</button>
 			</div>
 		</div>
 	
 		<div class="info">
+		<!--
 			<p>current puzzle: <span id="curPuzzle">default puzzle >>> 1,2,0,3,6,8,7,5,4</span></p> 
+		-->
 			<p>solution: </p> 
 			<p id="solution">Show solution.</p>
 		</div>
@@ -64,7 +53,7 @@
 		// show state
 		function showPuzzle(){
 			// show current state in infomation
-			document.getElementById("curPuzzle").innerText = curPuzzle;
+			// document.getElementById("curPuzzle").innerText = curPuzzle;
 			document.getElementById("solution").innerText = "Show solution.";
 			// show current state in UI
 			showState();
@@ -77,6 +66,12 @@
 			}
 			document.getElementById("solution").innerText = solution;
 		}
+
+		function reset() {
+			curPuzzle = thisPuzzle.concat();
+			showPuzzle();
+		}
+
 	</script>
 	<script type="text/javascript">
 	// show puzzle

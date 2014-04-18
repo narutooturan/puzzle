@@ -40,8 +40,12 @@ test state:
 */
 
 
+
+
 // current puzzle, default puzzle
 var curPuzzle = [1,2,0,3,6,8,7,5,4];
+// this game's puzzle
+var thisPuzzle = curPuzzle.concat();
 
 // clear after solve!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // last move's direction
@@ -56,6 +60,7 @@ state: puzzle's state, [0,1,2,3,4,5,6,7,8]
 */
 	var state = [];
 	state = curPuzzle.concat();
+	thisPuzzle = curPuzzle.concat();
 	lastMoveDir = "";
 	lastMove = [];
 	console.log("state: " + curPuzzle);
@@ -488,6 +493,7 @@ function newPuzzle() {
 	
 	console.log("current puzzle: " + puzzle);
 	curPuzzle = puzzle;
+	thisPuzzle = curPuzzle.concat();
 	// show state in UI
 	showPuzzle();
 }

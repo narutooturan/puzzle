@@ -6,6 +6,10 @@ h2 {
 	text-align: center;
 }
 
+p {
+	
+}
+
 /* puzzle */
 .content {
 	width: 800px;
@@ -13,7 +17,7 @@ h2 {
 }
 
 .puzzles {
-	width: 720px;
+	width: 320px;
 	margin: auto;
 }
 
@@ -47,7 +51,7 @@ h2 {
 }
 
 .btnGrp {
-	width: 360px;
+	width: 295px;
 	margin: auto;
 }
 
