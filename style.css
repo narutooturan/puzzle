@@ -1,0 +1,76 @@
+body {
+	margin: auto;
+}
+
+h2 {
+	text-align: center;
+}
+
+p {
+	
+}
+
+/* puzzle */
+.content {
+	width: 800px;
+	margin: 50px auto;
+}
+
+.puzzles {
+	width: 320px;
+	margin: auto;
+}
+
+.puzzle {
+	
+	width: 260px;
+	margin: 0px 50px 10px 50px;
+	/* puzzle position */
+	float: left;
+}
+
+.tile {
+	height: 80px;
+	width: 80px;
+	/* center text */
+	line-height: 80px;
+	text-align: center;
+	/* tile position */
+	float: left;
+	/* tile style */
+	border: 1px solid black;
+	border-radius: 5px;
+	margin: 2px;
+}
+
+/* puzzle control */
+.control {
+	width: 800px;
+	margin: 20px auto;
+	float: left;
+}
+
+.btnGrp {
+	width: 295px;
+	margin: auto;
+}
+
+.button {
+	border:1px solid #000;
+	border-radius:25px;
+	padding: 5px 10px;
+	margin: auto 5px;
+	background-color: #fff;
+	color: #000;
+}
+
+.button:hover {
+	background-color: #000;
+	color: #fff;
+}
+
+.info {
+	width: 800px;
+	float: left;
+
+}
