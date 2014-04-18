@@ -16,21 +16,21 @@
 		</div>
 		<div class="puzzles">
 			<div class="puzzle">
-				<p>原始状态</p>
-				<div class="tile">1</div>
-				<div class="tile">2</div>
+				<p>目前状态</p>
 				<div class="tile"></div>
-				<div class="tile">3</div>
-				<div class="tile">6</div>
-				<div class="tile">8</div>
-				<div class="tile">7</div>
-				<div class="tile">5</div>
-				<div class="tile">4</div>
+				<div class="tile"></div>
+				<div class="tile"></div>
+				<div class="tile"></div>
+				<div class="tile"></div>
+				<div class="tile"></div>
+				<div class="tile"></div>
+				<div class="tile"></div>
+				<div class="tile"></div>
 			</div>
 
 			<div class="puzzle">
-				<p>目前状态</p>
-				<div class="tile"></div>
+				<p>目标状态</p>
+				<div class="tile">0</div>
 				<div class="tile">1</div>
 				<div class="tile">2</div>
 				<div class="tile">3</div>
@@ -50,24 +50,120 @@
 		</div>
 	
 		<div class="info">
-			<p>current puzzle: <span id="curPuzzle">1,2,0,3,6,8,7,5,4</span></p> 
+			<p>current puzzle: <span id="curPuzzle">default puzzle >>> 1,2,0,3,6,8,7,5,4</span></p> 
 			<p>solution: </p> 
-			<p id="solution">solution</p>
+			<p id="solution">Show solution.</p>
 		</div>
 		
 	</div>
 
+
+	<script type="text/javascript" src="jquery-1.8.3.js"></script>
 	<script type="text/javascript">
+	// show infomation
+		// show state
 		function showPuzzle(){
+			// show current state in infomation
 			document.getElementById("curPuzzle").innerText = curPuzzle;
+			document.getElementById("solution").innerText = "Show solution.";
+			// show current state in UI
+			showState();
 		}
+		// show solution
 		function showSolution(){
 			var solution = "";
 			for(move in lastMove){
-				solution += ">>> " + lastMove[move] + "\n";
+				solution += ">>> " + lastMove[move][1] + "";
 			}
 			document.getElementById("solution").innerText = solution;
 		}
+	</script>
+	<script type="text/javascript">
+	// show puzzle
+		// show puzzle state in UI
+		function showState(){
+			for ( t in curPuzzle){
+				$(".tile")[t].innerHTML = curPuzzle[t];
+			}
+		}
+
+		// key listener
+		$(document).keydown(function(){
+			var dir = "";
+			lastMoveDir = "";
+			console.log(event.keyCode);
+			switch ( event.keyCode ){
+				case 65:
+				// left
+					dir = "left";
+					var moves = generateMoves(curPuzzle);
+					for ( m in moves ){
+						m = moves[m];
+						if ( m[1] == dir ){
+							console.log(dir);
+							makeMove( curPuzzle, m );
+							showState();
+							break;
+						}
+					}
+				break;
+				case 87:
+				// up
+					dir = "up";
+					var moves = generateMoves(curPuzzle);
+					for ( m in moves ){
+						m = moves[m];
+						if ( m[1] == dir ){
+							console.log(dir);
+							makeMove( curPuzzle, m );
+							showState();
+							break;
+						}
+					}
+				break;
+				case 68:
+				// right
+					dir = "right";
+					var moves = generateMoves(curPuzzle);
+					for ( m in moves ){
+						m = moves[m];
+						if ( m[1] == dir ){
+							console.log(dir);
+							makeMove( curPuzzle, m );
+							showState();
+							break;
+						}
+					}
+				break;
+				case 83:
+				// down
+					dir = "down";
+					var moves = generateMoves(curPuzzle);
+					for ( m in moves ){
+						m = moves[m];
+						if ( m[1] == dir ){
+							console.log(dir);
+							makeMove( curPuzzle, m );
+							showState();
+							break;
+						}
+					}
+				break;
+			}
+		});
+		
+
+		// init game
+		function init() {
+			// generate puzzle randomly
+			newPuzzle();
+			// show puzzle
+			showState();
+		}
+		
+	</script>
+	<script type="text/javascript">
+		init();
 	</script>
 
 </body>
