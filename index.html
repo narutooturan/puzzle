@@ -4,44 +4,44 @@
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
 	<title>8 puzzle</title>
-
+	
+	<!--game style-->
 	<link type="text/css" rel="stylesheet" href="style.css">
 	<script type="text/javascript" language="javascript" src="script.js"></script>
 </head>
 
 <body>
 	<div class="content">
+		
 		<div>
 			<h2> — 8 puzzle — </h2>
-			<p style="text-align: center;" >W: ↑; D: →;S: ↓;A: ←;</p>
+			<p style="text-align: center;" >Tips: W: ↑   D: →   S: ↓   A: ←  </p>
 		</div>
-		<div class="puzzles">
-			<div class="puzzle">
-				<div class="tile"></div>
-				<div class="tile"></div>
-				<div class="tile"></div>
-				<div class="tile"></div>
-				<div class="tile"></div>
-				<div class="tile"></div>
-				<div class="tile"></div>
-				<div class="tile"></div>
-				<div class="tile"></div>
-			</div>
-		</div>
-		<div class="control">
-			<div class="btnGrp">
+
+		<div class="btnGrp">
 			<button id="new" class="button" onclick="newPuzzle()" >New Puzzle!</button>
 			<button id="solve" class="button" onclick="iterativeDeepening()" >Solve!</button>
 			<button id="play" class="button" onclick="reset()" >Reset!</button>
-			</div>
 		</div>
-	
+
+		<div class="puzzle">
+			<div class="tile"></div>
+			<div class="tile"></div>
+			<div class="tile"></div>
+			<div class="tile"></div>
+			<div class="tile"></div>
+			<div class="tile"></div>
+			<div class="tile"></div>
+			<div class="tile"></div>
+			<div class="tile"></div>
+		</div>
+
 		<div class="info">
 		<!--
 			<p>current puzzle: <span id="curPuzzle">default puzzle >>> 1,2,0,3,6,8,7,5,4</span></p> 
 		-->
-			<p>solution: </p> 
-			<p id="solution">Show solution.</p>
+			<p style="font-size: 20px;font-weight: bold;" >SOLUTION ↓ </p> 
+			<p id="solution">Hit [SOLVE]! Show solution!</p>
 		</div>
 		
 	</div>
@@ -54,7 +54,7 @@
 		function showPuzzle(){
 			// show current state in infomation
 			// document.getElementById("curPuzzle").innerText = curPuzzle;
-			document.getElementById("solution").innerText = "Show solution.";
+			document.getElementById("solution").innerText = "Hit [SOLVE]! Show solution!";
 			// show current state in UI
 			showState();
 		}
@@ -62,7 +62,7 @@
 		function showSolution(){
 			var solution = "";
 			for(move in lastMove){
-				solution += ">>> " + lastMove[move][1] + "";
+				solution += ">>> " + lastMove[move][1] + " ";
 			}
 			document.getElementById("solution").innerText = solution;
 		}
@@ -78,9 +78,9 @@
 		// show puzzle state in UI
 		function showState(){
 			for ( t in curPuzzle){
-				$(".tile")[t].innerHTML = curPuzzle[t];
+				$(".tile")[t].innerHTML = "<p>" + curPuzzle[t] + "</p>";
 				if (curPuzzle[t]=="0"){
-					$(".tile")[t].innerHTML= "<p></p>";
+					$(".tile")[t].innerHTML= "<p style=\"background-color:#fff\" > </p>";
 				}
 			}
 		}
@@ -163,6 +163,7 @@
 	<script type="text/javascript">
 		init();
 	</script>
+
 
 </body>
 </html>

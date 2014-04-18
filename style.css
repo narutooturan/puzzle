@@ -1,5 +1,6 @@
 body {
 	margin: auto;
+	
 }
 
 h2 {
@@ -16,50 +17,42 @@ p {
 	margin: 50px auto;
 }
 
-.puzzles {
-	width: 320px;
+.puzzle {
+	width: 380px;
 	margin: auto;
 }
 
-.puzzle {
-	
-	width: 260px;
-	margin: 0px 50px 10px 50px;
-	/* puzzle position */
-	float: left;
-}
-
 .tile {
-	height: 80px;
-	width: 80px;
+	height: 120px;
+	width: 120px;
 	/* center text */
-	line-height: 80px;
 	text-align: center;
 	/* tile position */
 	float: left;
 	/* tile style */
-	border: 1px solid black;
+	border: 1px solid #aaa;
+	background-color: #eee;
 	border-radius: 5px;
 	margin: 2px;
+	
+}
+
+.tile p {
+	font-size: 40px;
+	font-weight: bold;
 }
 
 /* puzzle control */
-.control {
-	width: 800px;
-	margin: 20px auto;
-	float: left;
-}
-
 .btnGrp {
-	width: 295px;
-	margin: auto;
+	width: 385px;
+	margin: 40px auto;
 }
 
 .button {
-	border:1px solid #000;
-	border-radius:25px;
+	border: 1px solid #000;
+	border-radius: 25px;
 	padding: 5px 10px;
-	margin: auto 5px;
+	margin: auto 20px;
 	background-color: #fff;
 	color: #000;
 }
