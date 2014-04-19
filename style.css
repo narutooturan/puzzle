@@ -38,6 +38,9 @@ p {
 }
 
 .tile p {
+	color: rgba(255, 255, 255, 0);
+	margin: 0px;
+	line-height: 120px;
 	font-size: 40px;
 	font-weight: bold;
 }

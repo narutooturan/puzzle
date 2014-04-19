@@ -15,7 +15,9 @@
 		
 		<div>
 			<h2> — 8 puzzle — </h2>
-			<p style="text-align: center;" >Tips: W: ↑   D: →   S: ↓   A: ←  </p>
+			<p style="text-align: center;" >Tips: W: ↑   D: →   S: ↓   A: ←  &nbsp;
+			<span><a href="image/puzzle.jpg" target="_blank"><img src="image/puzzle.jpg" width="30" height="30" ></a></span>
+			</p>
 		</div>
 
 		<div class="btnGrp">
@@ -78,7 +80,7 @@
 		// show puzzle state in UI
 		function showState(){
 			for ( t in curPuzzle){
-				$(".tile")[t].innerHTML = "<p>" + curPuzzle[t] + "</p>";
+				$(".tile")[t].innerHTML = "<p style=\"background-image: url(image/"+curPuzzle[t]+".jpg); \">" + curPuzzle[t] + "</p>";
 				if (curPuzzle[t]=="0"){
 					$(".tile")[t].innerHTML= "<p style=\"background-color:#fff\" > </p>";
 				}
