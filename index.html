@@ -7,25 +7,30 @@
 	
 	<!--game style-->
 	<link type="text/css" rel="stylesheet" href="style.css">
+	<!--jquery-->
+	<script type="text/javascript" src="jquery-1.8.3.js"></script>
+	<!--utility-->
 	<script type="text/javascript" language="javascript" src="script.js"></script>
+	<!--ida star-->
+	<script type="text/javascript" language="javascript" src="idastar.js"></script>
 </head>
 
 <body>
 	<div class="content">
-		
+		<!--game tips-->
 		<div>
 			<h2> — 8 puzzle — </h2>
 			<p style="text-align: center;" >Tips: W: ↑   D: →   S: ↓   A: ←  &nbsp;
 			<span><a href="image/puzzle.jpg" target="_blank"><img src="image/puzzle.jpg" width="30" height="30" ></a></span>
 			</p>
 		</div>
-
+		<!--button group-->
 		<div class="btnGrp">
 			<button id="new" class="button" onclick="newPuzzle()" >New Puzzle!</button>
 			<button id="solve" class="button" onclick="iterativeDeepening()" >Solve!</button>
 			<button id="play" class="button" onclick="reset()" >Reset!</button>
 		</div>
-
+		<!--game puzzle-->
 		<div class="puzzle">
 			<div class="tile"></div>
 			<div class="tile"></div>
@@ -37,133 +42,24 @@
 			<div class="tile"></div>
 			<div class="tile"></div>
 		</div>
-
+		<!--game information-->
 		<div class="info">
-		<!--
-			<p>current puzzle: <span id="curPuzzle">default puzzle >>> 1,2,0,3,6,8,7,5,4</span></p> 
-		-->
 			<p style="font-size: 20px;font-weight: bold;" >SOLUTION ↓ </p> 
 			<p id="solution">Hit [SOLVE]! Show solution!</p>
 		</div>
 		
 	</div>
-
-
-	<script type="text/javascript" src="jquery-1.8.3.js"></script>
+	
 	<script type="text/javascript">
-	// show infomation
-		// show state
-		function showPuzzle(){
-			// show current state in infomation
-			// document.getElementById("curPuzzle").innerText = curPuzzle;
-			document.getElementById("solution").innerText = "Hit [SOLVE]! Show solution!";
-			// show current state in UI
-			showState();
-		}
-		// show solution
-		function showSolution(){
-			var solution = "";
-			for(move in lastMove){
-				solution += ">>> " + lastMove[move][1] + " ";
-			}
-			document.getElementById("solution").innerText = solution;
-		}
-
-		function reset() {
-			curPuzzle = thisPuzzle.concat();
-			showPuzzle();
-		}
-
-	</script>
-	<script type="text/javascript">
-	// show puzzle
-		// show puzzle state in UI
-		function showState(){
-			for ( t in curPuzzle){
-				$(".tile")[t].innerHTML = "<p style=\"background-image: url(image/"+curPuzzle[t]+".jpg); \">" + curPuzzle[t] + "</p>";
-				if (curPuzzle[t]=="0"){
-					$(".tile")[t].innerHTML= "<p style=\"background-color:#fff\" > </p>";
-				}
-			}
-		}
-
-		// key listener
-		$(document).keydown(function(){
-			var dir = "";
-			lastMoveDir = "";
-			console.log(event.keyCode);
-			switch ( event.keyCode ){
-				case 65:
-				// left
-					dir = "left";
-					var moves = generateMoves(curPuzzle);
-					for ( m in moves ){
-						m = moves[m];
-						if ( m[1] == dir ){
-							console.log(dir);
-							makeMove( curPuzzle, m );
-							showState();
-							break;
-						}
-					}
-				break;
-				case 87:
-				// up
-					dir = "up";
-					var moves = generateMoves(curPuzzle);
-					for ( m in moves ){
-						m = moves[m];
-						if ( m[1] == dir ){
-							console.log(dir);
-							makeMove( curPuzzle, m );
-							showState();
-							break;
-						}
-					}
-				break;
-				case 68:
-				// right
-					dir = "right";
-					var moves = generateMoves(curPuzzle);
-					for ( m in moves ){
-						m = moves[m];
-						if ( m[1] == dir ){
-							console.log(dir);
-							makeMove( curPuzzle, m );
-							showState();
-							break;
-						}
-					}
-				break;
-				case 83:
-				// down
-					dir = "down";
-					var moves = generateMoves(curPuzzle);
-					for ( m in moves ){
-						m = moves[m];
-						if ( m[1] == dir ){
-							console.log(dir);
-							makeMove( curPuzzle, m );
-							showState();
-							break;
-						}
-					}
-				break;
-			}
-		});
-		
-
 		// init game
-		function init() {
-			// generate puzzle randomly
-			newPuzzle();
-			// show puzzle
-			showState();
-		}
-		
-	</script>
-	<script type="text/javascript">
 		init();
+		var FPS = 60;
+		console.log("Game Updating");
+
+		// run game
+		// var _intervalId = setInterval(function(){
+		// 	showState();
+		// }, 1000/FPS);
 	</script>
 
 
