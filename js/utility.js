@@ -1,10 +1,8 @@
-/****** *************** ******/
-/****** button function ******/
-/****** *************** ******/
-// new puzzle button
+
+// new puzzle
 function newPuzzle() {
-// generate puzzle state randomly
-	// state array
+// generate puzzle status randomly
+	// status array
 	var puzzles = [
 		[ 1, 2, 0, 3, 6, 8, 7, 5, 4 ],
 		[ 1, 8, 4, 5, 0, 7, 3, 2, 6 ],
@@ -214,12 +212,59 @@ function newPuzzle() {
 
 	puzzle = puzzles[ Math.floor( Math.random() * puzzles.length ) ];
 	
-	console.log("current puzzle: " + puzzle);
-	curPuzzle = puzzle;
-	thisPuzzle = curPuzzle.concat();
-	// show state in UI
-	showSolutionTips();
+	console.log("new puzzle: " + puzzle);
+	return puzzle;
+
 }
+
+/****** *************** ******/
+/****** button function ******/
+/****** *************** ******/
+function btnNewPuzzle() {
+// new puzzle button
+	thisPuzzle = newPuzzle();
+	curPuzzle = thisPuzzle.concat();
+}
+
+function btnReset() {
+// reset button
+	curPuzzle = thisPuzzle.concat();
+}
+
+function btnSolve() {
+// solve button
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // solve button
 // run iterativeDeepening(), then show solution in information panel
@@ -232,23 +277,16 @@ function showSolution(){
 	document.getElementById("solution").innerText = solution;
 }
 
-// reset button
-// reset puzzle array, then show puzzle
-function reset() {
-	curPuzzle = thisPuzzle.concat();
-	showSolutionTips();
-}
-
 // show infomation
 // show solution tips
 function showSolutionTips(){
 	document.getElementById("solution").innerText = "Hit [SOLVE]! Show solution!";
-	// show picture in UI depending on current state
+	// show picture in UI depending on current status
 	showPic();
 }
 
 // show puzzle
-// show puzzle state in UI
+// show puzzle status in UI
 function showPic(){
 	for ( t in curPuzzle){
 		$(".tile")[t].innerHTML = "<p style=\"background-image: url(image/"+curPuzzle[t]+".jpg); \">" + curPuzzle[t] + "</p>";
@@ -256,86 +294,5 @@ function showPic(){
 			$(".tile")[t].innerHTML= "<p style=\"background-color:#fff\" > </p>";
 		}
 	}
-}
+}	
 
-
-
-
-/****** ********** ******/
-/****** game event ******/
-/****** ********** ******/
-// key listener
-$(document).keydown(function(){
-	var dir = "";
-	lastMoveDir = "";
-	console.log(event.keyCode);
-	switch ( event.keyCode ){
-		case 65:
-		// left
-			dir = "left";
-			var moves = generateMoves(curPuzzle);
-			for ( m in moves ){
-				m = moves[m];
-				if ( m[1] == dir ){
-					console.log(dir);
-					makeMove( curPuzzle, m );
-					showPic();
-					break;
-				}
-			}
-		break;
-		case 87:
-		// up
-			dir = "up";
-			var moves = generateMoves(curPuzzle);
-			for ( m in moves ){
-				m = moves[m];
-				if ( m[1] == dir ){
-					console.log(dir);
-					makeMove( curPuzzle, m );
-					showPic();
-					break;
-				}
-			}
-		break;
-		case 68:
-		// right
-			dir = "right";
-			var moves = generateMoves(curPuzzle);
-			for ( m in moves ){
-				m = moves[m];
-				if ( m[1] == dir ){
-					console.log(dir);
-					makeMove( curPuzzle, m );
-					showPic();
-					break;
-				}
-			}
-		break;
-		case 83:
-		// down
-			dir = "down";
-			var moves = generateMoves(curPuzzle);
-			for ( m in moves ){
-				m = moves[m];
-				if ( m[1] == dir ){
-					console.log(dir);
-					makeMove( curPuzzle, m );
-					showPic();
-					break;
-				}
-			}
-		break;
-	}
-});
-		
-
-/****** ********* ******/
-/****** init game ******/
-/****** ********* ******/
-function init() {
-	// generate puzzle randomly
-	newPuzzle();
-	// show puzzle
-	showPic();
-}

@@ -3,11 +3,11 @@ puzzle AI:
 1. IDA*
 2. Manhattan
 
-Integer <- IterativeDeepening( state )
-　　　Threshold <- ManhattanEvaluate( state )
+Integer <- IterativeDeepening( status )
+　　　Threshold <- ManhattanEvaluate( status )
 　　　Solution <- NO
 　　　While solution == NO do
-　　　    If Search( state, 0, threshold ) == YES then
+　　　    If Search( status, 0, threshold ) == YES then
 　　　        Break
         Threshold <- IncrementThreshold()
 　　　Endwhile
@@ -15,25 +15,25 @@ Integer <- IterativeDeepening( state )
 　　　Return threshold
 end
 
-Boolean <- Search( state, g, threshold )
-　　　H <- ManhattanEvaluate( state )
+Boolean <- Search( status, g, threshold )
+　　　H <- ManhattanEvaluate( status )
 　　　If h == 0 then
 　　　    Return TRUE
 　　　If g+h > threshold then
 　　　    Return FALSE
-　　　Movelist <- GenerateMoves( state )
+　　　Movelist <- GenerateMoves( status )
 　　　Foreach move on movelist do
-　　　    MakeMove( state, move )
-　　　    If Search( state, g+1, threshold ) == TRUE then
+　　　    MakeMove( status, move )
+　　　    If Search( status, g+1, threshold ) == TRUE then
 　　　        Return TRUE
-　　　    undoMove( state, move )
+　　　    undoMove( status, move )
 　　　Endfor
 　　　Return FALSE
 end
 
 
 
-test state:
+test status:
 [1,2,0,3,6,8,7,5,4]
 [1,8,4,5,0,7,3,2,6]
 
@@ -42,9 +42,9 @@ test state:
 
 
 
-// current puzzle, default puzzle
+// current status, default puzzle
 var curPuzzle = [1,2,0,3,6,8,7,5,4];
-// this game's puzzle
+// current round's status
 var thisPuzzle = curPuzzle.concat();
 
 // clear after solve!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -56,20 +56,20 @@ var lastMove = [];
 function iterativeDeepening () {
 /*
 iterative deepening: run search function with specific depth(threshold) iteratively.
-state: puzzle's state, [0,1,2,3,4,5,6,7,8]
+status: puzzle's status, [0,1,2,3,4,5,6,7,8]
 */
-	var state = [];
-	state = curPuzzle.concat();
+	var status = [];
+	status = curPuzzle.concat();
 	thisPuzzle = curPuzzle.concat();
 	lastMoveDir = "";
 	lastMove = [];
-	console.log("state: " + curPuzzle);
+	console.log("status: " + curPuzzle);
 	
-	var threshold = manhattan( state );
+	var threshold = manhattan( status );
 　　var solution = false;
 　　while ( !solution ) {
 		// if find solution, break while
-		if ( solution = search( state, 0, threshold ) ) {
+		if ( solution = search( status, 0, threshold ) ) {
 			break;
 		}
 		// deepen search depth
@@ -83,8 +83,8 @@ state: puzzle's state, [0,1,2,3,4,5,6,7,8]
 
 }
 
-function search ( state, g, threshold ) {
-	var h = manhattan( state );
+function search ( status, g, threshold ) {
+	var h = manhattan( status );
 	if ( h == 0 ) {
 		return true;
 	}
@@ -93,24 +93,24 @@ function search ( state, g, threshold ) {
 		return false;
 	}
 
-　　var movelist = generateMoves( state );
+　　var movelist = generateMoves( status );
 
 	for( move in movelist ) {
 		move = movelist[move];
-		state = makeMove( state, move );
+		status = makeMove( status, move );
 		lastMove.push(move);
 		lastMoveDir = move[1];
-		if ( search( state, g + 1, threshold ) == true){
+		if ( search( status, g + 1, threshold ) == true){
 			return true;
 		}
-		state = undoMove( state, lastMove[lastMove.length-1] );
+		status = undoMove( status, lastMove[lastMove.length-1] );
 		lastMove.pop();
 	}
 
 	return false;
 }
 
-function makeMove ( state, move ) {
+function makeMove ( status, move ) {
 	// moving node's direction and array index
 	var moveDir = move[1];
 	var moveNode = move[0];
@@ -134,13 +134,13 @@ function makeMove ( state, move ) {
 			node[0] = moveNode[0];
 		break;
 	}
-	// change state
-	state[ node[0]*3 + node[1] ] = state[ moveNode[0]*3 + moveNode[1] ];
-	state[ moveNode[0]*3 + moveNode[1] ] = 0;
-	return state;
+	// change status
+	status[ node[0]*3 + node[1] ] = status[ moveNode[0]*3 + moveNode[1] ];
+	status[ moveNode[0]*3 + moveNode[1] ] = 0;
+	return status;
 }
 
-function undoMove ( state, move ) {
+function undoMove ( status, move ) {
 	// moving node's direction and array index
 	var moveDir = move[1];
 	var moveNode = move[0];
@@ -164,12 +164,12 @@ function undoMove ( state, move ) {
 			node[0] = moveNode[0];
 		break;
 	}
-	state[ moveNode[0]*3 + moveNode[1] ] = state[ node[0]*3 + node[1] ];
-	state[ node[0]*3 + node[1] ] = 0;
-	return state;
+	status[ moveNode[0]*3 + moveNode[1] ] = status[ node[0]*3 + node[1] ];
+	status[ node[0]*3 + node[1] ] = 0;
+	return status;
 }
 
-function generateMoves ( state ) {
+function generateMoves ( status ) {
 // generate moves, clockwise
 // movelisht: [([1,1],up),([1,1],up)]
 // move: ([1,1],up)
@@ -182,8 +182,8 @@ function generateMoves ( state ) {
 	// empty tile's neighbours' position
 	var neighbours = [];
 	// search empty tile
-	for ( s in state ) {
-		if ( state[s] == 0 ){
+	for ( s in status ) {
+		if ( status[s] == 0 ){
 			// get empty tile's position
 			var sPosition = [ Math.floor(s/3), (s%3) ];
 			// get empty tile's neighbours' position
@@ -237,7 +237,7 @@ function incrementThreshold ( threshold ) {
 	return threshold + 2;
 }
 
-function manhattan ( state ){
+function manhattan ( status ){
 /* 	Manhattan distance
 	e.g.
 				↓ end point
@@ -253,7 +253,7 @@ function manhattan ( state ){
 	Manhattan distance is sum of horizontal distance and vertical distance.
 	e.g. D = 3 + 4;
 
-	state: puzzle's state, [0,1,2,3,4,5,6,7,8]
+	status: puzzle's status, [0,1,2,3,4,5,6,7,8]
 	manhattanCost: total manhattan distance in puzzle. PS: 0 is not included
 */
 
@@ -262,7 +262,7 @@ function manhattan ( state ){
 	// right puzzle's order
 	var initPuzzle = [0,1,2,3,4,5,6,7,8];
 	// current puzzle's order
-	var currentPuzzle = state;
+	var currentPuzzle = status;
 
 	// calculate manhattanCost
 	for ( i in initPuzzle){

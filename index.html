@@ -7,12 +7,7 @@
 	
 	<!--game style-->
 	<link type="text/css" rel="stylesheet" href="style.css">
-	<!--jquery-->
-	<script type="text/javascript" src="jquery-1.8.3.js"></script>
-	<!--utility-->
-	<script type="text/javascript" language="javascript" src="script.js"></script>
-	<!--ida star-->
-	<script type="text/javascript" language="javascript" src="idastar.js"></script>
+
 </head>
 
 <body>
@@ -26,22 +21,11 @@
 		</div>
 		<!--button group-->
 		<div class="btnGrp">
-			<button id="new" class="button" onclick="newPuzzle()" >New Puzzle!</button>
+			<button id="new" class="button" onclick="btnNewPuzzle()" >New Puzzle!</button>
 			<button id="solve" class="button" onclick="iterativeDeepening()" >Solve!</button>
-			<button id="play" class="button" onclick="reset()" >Reset!</button>
+			<button id="play" class="button" onclick="btnReset()" >Reset!</button>
 		</div>
-		<!--game puzzle-->
-		<div class="puzzle">
-			<div class="tile"></div>
-			<div class="tile"></div>
-			<div class="tile"></div>
-			<div class="tile"></div>
-			<div class="tile"></div>
-			<div class="tile"></div>
-			<div class="tile"></div>
-			<div class="tile"></div>
-			<div class="tile"></div>
-		</div>
+		<canvas id="canvas" width="360" height="360" ></canvas>
 		<!--game information-->
 		<div class="info">
 			<p style="font-size: 20px;font-weight: bold;" >SOLUTION ↓ </p> 
@@ -50,18 +34,21 @@
 		
 	</div>
 	
-	<script type="text/javascript">
-		// init game
-		init();
-		var FPS = 60;
-		console.log("Game Updating");
+	<!--Tile object-->
+	<script type="text/javascript" language="javascript" src="js/Tile.js"></script>
+	<!--Canvas object-->
+	<script type="text/javascript" language="javascript" src="js/Canvas.js"></script>
+	<!--Game object-->
+	<script type="text/javascript" language="javascript" src="js/Game.js"></script>
+	
 
-		// run game
-		// var _intervalId = setInterval(function(){
-		// 	showState();
-		// }, 1000/FPS);
-	</script>
+	<!--utility-->
+	<script type="text/javascript" language="javascript" src="js/utility.js"></script>
+	<!--ida star-->
+	<script type="text/javascript" language="javascript" src="js/idastar.js"></script>
 
+	<!--main game-->
+	<script type="text/javascript" src="js/main.js"></script>
 
 </body>
 </html>

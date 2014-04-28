@@ -70,3 +70,10 @@ p {
 	float: left;
 
 }
+
+/*canvas*/
+#canvas {
+	display: block;
+
+	margin: auto;
+}
