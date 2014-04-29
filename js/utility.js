@@ -1,4 +1,6 @@
-
+/****** **************** ******/
+/****** utility function ******/
+/****** **************** ******/
 // new puzzle
 function newPuzzle() {
 // generate puzzle status randomly
@@ -217,55 +219,6 @@ function newPuzzle() {
 
 }
 
-/****** *************** ******/
-/****** button function ******/
-/****** *************** ******/
-function btnNewPuzzle() {
-// new puzzle button
-	thisPuzzle = newPuzzle();
-	curPuzzle = thisPuzzle.concat();
-}
-
-function btnReset() {
-// reset button
-	curPuzzle = thisPuzzle.concat();
-}
-
-function btnSolve() {
-// solve button
-	
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // solve button
 // run iterativeDeepening(), then show solution in information panel
 // show solution
@@ -281,18 +234,37 @@ function showSolution(){
 // show solution tips
 function showSolutionTips(){
 	document.getElementById("solution").innerText = "Hit [SOLVE]! Show solution!";
-	// show picture in UI depending on current status
-	showPic();
 }
 
-// show puzzle
-// show puzzle status in UI
-function showPic(){
-	for ( t in curPuzzle){
-		$(".tile")[t].innerHTML = "<p style=\"background-image: url(image/"+curPuzzle[t]+".jpg); \">" + curPuzzle[t] + "</p>";
-		if (curPuzzle[t]=="0"){
-			$(".tile")[t].innerHTML= "<p style=\"background-color:#fff\" > </p>";
-		}
-	}
-}	
+// show Win
+function showWinTips(){
+	document.getElementById("solution").innerText = "You Win!";
+}
 
+
+/****** *************** ******/
+/****** button function ******/
+/****** *************** ******/
+function btnNewPuzzle() {
+// new puzzle button
+	// new puzzle
+	thisPuzzle = newPuzzle();
+	curPuzzle = thisPuzzle.concat();
+	// show solution tips
+	showSolutionTips();
+}
+
+function btnReset() {
+// reset button
+	curPuzzle = thisPuzzle.concat();
+	// show solution tips
+	showSolutionTips();
+}
+
+function btnSolve() {
+// solve button
+	// find solution
+	iterativeDeepening( curPuzzle.concat() );
+	// show solution
+	showSolution();
+}

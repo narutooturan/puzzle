@@ -4,6 +4,7 @@
 
 var Game = {
 // game draw, logic, event...
+	isWin: false,
 	init: function(){
 	// init game
 		// create tile
@@ -32,6 +33,24 @@ var Game = {
 			tiles[curPuzzle[i]].y = row * tiles[curPuzzle[i]].width;
 		};
 
+		// check if win
+		for (var i = 0; i < 9 ; i++) {
+			if ( curPuzzle[i] == i ){
+				this.isWin = true;
+			}else{
+				this.isWin = false;
+				break;
+			}
+		};
+		// if win, show tips, new game
+		if ( this.isWin ){
+			// show win
+			showWinTips();
+			console.log("You win!");
+			// new game
+			this.isWin = false;
+		}
+
 	},
 	keyEvent: function(event){
 	// key event
@@ -48,7 +67,6 @@ var Game = {
 					if ( m[1] == dir ){
 						console.log(dir);
 						makeMove( curPuzzle, m );
-						showPic();
 						break;
 					}
 				}
@@ -62,7 +80,6 @@ var Game = {
 					if ( m[1] == dir ){
 						console.log(dir);
 						makeMove( curPuzzle, m );
-						showPic();
 						break;
 					}
 				}
@@ -76,7 +93,6 @@ var Game = {
 					if ( m[1] == dir ){
 						console.log(dir);
 						makeMove( curPuzzle, m );
-						showPic();
 						break;
 					}
 				}
@@ -90,7 +106,6 @@ var Game = {
 					if ( m[1] == dir ){
 						console.log(dir);
 						makeMove( curPuzzle, m );
-						showPic();
 						break;
 					}
 				}

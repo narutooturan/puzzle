@@ -15,20 +15,21 @@
 		<!--game tips-->
 		<div>
 			<h2> — 8 puzzle — </h2>
-			<p style="text-align: center;" >Tips: W: ↑   D: →   S: ↓   A: ←  &nbsp;
+			<p style="text-align: center;" >HOW TO PLAY: use W↑/A←/S↓/D→ to move tiles. &nbsp;
+			Final image is: 
 			<span><a href="image/puzzle.jpg" target="_blank"><img src="image/puzzle.jpg" width="30" height="30" ></a></span>
 			</p>
 		</div>
 		<!--button group-->
 		<div class="btnGrp">
 			<button id="new" class="button" onclick="btnNewPuzzle()" >New Puzzle!</button>
-			<button id="solve" class="button" onclick="iterativeDeepening()" >Solve!</button>
+			<button id="solve" class="button" onclick="btnSolve()" >Solve!</button>
 			<button id="play" class="button" onclick="btnReset()" >Reset!</button>
 		</div>
 		<canvas id="canvas" width="360" height="360" ></canvas>
 		<!--game information-->
 		<div class="info">
-			<p style="font-size: 20px;font-weight: bold;" >SOLUTION ↓ </p> 
+			<p style="font-size: 20px;font-weight: bold;" >Tips ↓ </p> 
 			<p id="solution">Hit [SOLVE]! Show solution!</p>
 		</div>
 		

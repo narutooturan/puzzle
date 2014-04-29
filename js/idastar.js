@@ -53,17 +53,15 @@ var lastMoveDir = "";
 // last move
 var lastMove = [];
 
-function iterativeDeepening () {
+function iterativeDeepening ( status ) {
 /*
 iterative deepening: run search function with specific depth(threshold) iteratively.
 status: puzzle's status, [0,1,2,3,4,5,6,7,8]
 */
-	var status = [];
-	status = curPuzzle.concat();
-	thisPuzzle = curPuzzle.concat();
+	
 	lastMoveDir = "";
 	lastMove = [];
-	console.log("status: " + curPuzzle);
+	console.log("status: " + status);
 	
 	var threshold = manhattan( status );
 　　var solution = false;
@@ -77,7 +75,7 @@ status: puzzle's status, [0,1,2,3,4,5,6,7,8]
 	}
 	
 	console.log("solution: " + lastMove);
-	showSolution();
+	
 	// show find solution
 	return true;
 
