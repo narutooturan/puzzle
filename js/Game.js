@@ -19,7 +19,11 @@ var Game = {
 	},
 	run: function(){
 	// run game
+		// clear screen
+		context.clearRect(0, 0, canvas.width, canvas.height);
+		// draw
 		Canvas.drawCanvas();
+
 		this.logic();
 	},
 	logic: function(){
@@ -115,6 +119,16 @@ var Game = {
 	stop: function(){
 	// stop game
 		
+	},
+	sleep: function( millisec ){
+		console.time('计时器'); 
+        var start = new Date().getTime();
+		 for (var i = 0; i < 1e7; i++) {
+		    if ((new Date().getTime() - start) > millisec){
+		      break;
+		    }
+		}
+        console.timeEnd('计时器'); 
 	}
 
 };
